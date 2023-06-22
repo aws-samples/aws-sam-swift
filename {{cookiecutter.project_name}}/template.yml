@@ -1,0 +1,123 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Template for {{ cookiecutter.project_name }}
+
+# create all Lambda functions with a 60 second timeout and environment variable for the database table name
+Globals:
+  Function:
+    Timeout: 60
+    CodeUri: .
+    Handler: swift.bootstrap
+    Runtime: provided.al2
+    MemorySize: 512
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref SwiftAPITable
+
+Resources:
+  # DynamoDB table to store your data
+  SwiftAPITable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+
+  # Lambda function to create a new item in the database
+  CreateItem:
+    Type: AWS::Serverless::Function
+    Properties:
+      Policies:
+        # allow function to read and write to database table
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SwiftAPITable
+      Events:
+        # handles the POST /item method of the REST API
+        Api:
+          Type: HttpApi
+          Properties:
+            Method: post
+            Path: /item
+    Metadata:
+      BuildMethod: makefile
+
+  # Lambda function to retrieve items from database
+  GetItems:
+    Type: AWS::Serverless::Function
+    Properties:
+      Policies:
+        # allow function to read and write to database table
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SwiftAPITable
+      Events:
+        # handles the GET /items method of the REST API
+        Api:
+          Type: HttpApi
+          Properties:
+            Method: get
+            Path: /items
+    Metadata:
+      BuildMethod: makefile
+
+  # Lambda function to retrieve single item from database
+  GetItem:
+    Type: AWS::Serverless::Function
+    Properties:
+      Policies:
+        # allow function to read and write to database table
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SwiftAPITable
+      Events:
+        # handles the GET /item method of the REST API
+        Api:
+          Type: HttpApi
+          Properties:
+            Method: get
+            Path: /item/{id}
+    Metadata:
+      BuildMethod: makefile
+
+  # Lambda function to update single item in database
+  UpdateItem:
+    Type: AWS::Serverless::Function
+    Properties:
+      Policies:
+        # allow function to read and write to database table
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SwiftAPITable
+      Events:
+        # handles the PUT /item method of the REST API
+        Api:
+          Type: HttpApi
+          Properties:
+            Method: put
+            Path: /item/{id}
+    Metadata:
+      BuildMethod: makefile
+
+  # Lambda function to delete single item in database
+  DeleteItem:
+    Type: AWS::Serverless::Function
+    Properties:
+      Policies:
+        # allow function to read and write to database table
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SwiftAPITable
+      Events:
+        # handles the DELETE /item method of the REST API
+        Api:
+          Type: HttpApi
+          Properties:
+            Method: delete
+            Path: /item/{id}
+    Metadata:
+      BuildMethod: makefile
+
+# print API endpoint and name of database table
+Outputs:
+  SwiftAPIEndpoint:
+    Description: "API Gateway endpoint URL for your application"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
+  SwiftAPITable:
+    Description: "DynamoDB Table Name"
+    Value: !Ref SwiftAPITable
