@@ -6,7 +6,9 @@ This project is intended to be used as a template location for the [SAM Command 
 
 
 ``` text
-You should not clone this project to use the SAM template. It is intended to be used as a target of the SAM CLI init command (see below).
+You should not clone this project to use the SAM template. 
+
+It is intended to be used as a target of the SAM CLI init command (see below).
 ```
 
 ## Prerequisites
