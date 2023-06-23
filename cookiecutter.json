@@ -1,3 +1,4 @@
 {
-    "project_name": "aws-swift-api"
+    "project_name": "aws-swift-api",
+    "architecture": ["x86_64", "arm64"]
 }

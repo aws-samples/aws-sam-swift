@@ -10,6 +10,8 @@ Globals:
     Handler: swift.bootstrap
     Runtime: provided.al2
     MemorySize: 512
+    Architectures:
+      - {{ cookiecutter.architecture }}
     Environment:
       Variables:
         TABLE_NAME: !Ref SwiftAPITable
