@@ -3,6 +3,16 @@ import platform
 import shutil
 from cookiecutter.main import cookiecutter
 
+def get_architecture() -> str:
+    arch = platform.machine().lower()
+
+    if 'amd' in arch or 'x86' in arch:
+        return 'x86_64'
+    elif 'aarch' in arch or 'arm' in arch:
+        return 'arm64'
+    else:
+        return arch
+
 def main():
 
     project_name = "{{ cookiecutter.project_name }}"
@@ -10,7 +20,7 @@ def main():
     template = "{{ cookiecutter.template }}"
 
     project_slug = project_name.lower().replace(' ', '-')
-    architecture = platform.machine()
+    architecture = get_architecture()
 
     templates_repo = "{{ cookiecutter._templates_repo }}"
     template_dir = os.path.join("templates", template.lower().replace(' ', '-'))
