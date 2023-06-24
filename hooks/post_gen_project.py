@@ -37,7 +37,7 @@ def main():
         templates_repo,
         directory=template_dir,
         no_input=True,
-        output_dir="..",
+        output_dir=f"./{project_name}/",
         overwrite_if_exists=True,
         extra_context={
             "project_name": project_name,

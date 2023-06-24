@@ -4,5 +4,5 @@
       "Hello World",
       "Serverless API"
     ],
-    "_templates_repo": "https://github.com/aws-samples/aws-sam-swift"
+    "_templates_repo": "https://github.com/dave-moser/aws-sam-swift"
 }
