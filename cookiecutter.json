@@ -1,4 +1,8 @@
 {
-    "project_name": "aws-swift-api",
-    "architecture": ["x86_64", "arm64"]
+    "project_name": "My Swift Project",
+    "template": [
+      "Hello World",
+      "Serverless API"
+    ],
+    "_templates_repo": "https://github.com/dave-moser/aws-sam-swift"
 }
