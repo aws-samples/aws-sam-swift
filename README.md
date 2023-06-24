@@ -26,7 +26,7 @@ To deploy an application based on this template, you need an AWS account and the
 sam init --location gh:aws-samples/aws-sam-swift
 ```
 
-When prompted, specify a name for your project and the template of the project you want to generate. Then switch to the project's folder. 
+When prompted, specify a name for your project and select the template for the type of project you want to generate. Then switch to the project's folder. 
 
 Instructions to build and deploy the application are located in the **README.md** file of the generated project.
 
