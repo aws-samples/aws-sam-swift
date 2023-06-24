@@ -42,7 +42,7 @@ def main():
     print(f"Dependency Manager: spm")
     print(f"Application Template: {template}")
     print()
-    print("Project initialized successfully! You can now jump to {} folder.".format(project_slug))
+    print("Project initialized successfully! You can now jump to the {} folder.".format(project_slug))
     print()
     print(f"Next steps can be found in the README file at {project_slug}/README.md")
     print()
