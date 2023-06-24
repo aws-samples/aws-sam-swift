@@ -38,9 +38,14 @@ struct CreateItem: SimpleLambdaHandler {
 
         // generate a unique id for the key of the item
         item.id = UUID().uuidString
+        let conditionExpression: String = "attribute_not_exists(id)"
 
         // use SDK to put the item into the database and return the item with key value
-        let input = PutItemInput(item: ["id": .s(item.id!), "itemName": .s(item.itemName)], tableName: tableName)
+        let input = PutItemInput(
+            conditionExpression: conditionExpression,
+            item: ["id": .s(item.id!), "itemName": .s(item.itemName)], 
+            tableName: tableName
+        )
 
         _ = try await client.putItem(input: input)
 

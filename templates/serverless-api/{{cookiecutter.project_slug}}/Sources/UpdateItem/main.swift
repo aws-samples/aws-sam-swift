@@ -47,9 +47,11 @@ struct UpdateItem: SimpleLambdaHandler {
         expressionParts.append(("itemName=:i"))
         attrValues[":i"] = .s(item.itemName)
         let updateExpression: String = "set \(expressionParts.joined(separator: ", "))"
+        let conditionExpression: String = "attribute_exists(id)"
         
          // use the sdk to update the item in DynamoDB
         let input = UpdateItemInput(
+            conditionExpression: conditionExpression,
             expressionAttributeValues: attrValues,
             key: ["id": .s(item.id!)],
             tableName: tableName,
