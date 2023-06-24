@@ -13,6 +13,15 @@ def get_architecture() -> str:
     else:
         return arch
 
+def remove_parent_project_folder(project_name: str):
+
+    try:
+        dirpath = os.path.join('../', project_name)
+        os.rename(dirpath, dirpath)
+        shutil.rmtree(dirpath, ignore_errors=True)
+    except:
+        print(f'Could not delete the parent folder: {project_name}. Please remove manually.')
+
 def main():
 
     project_name = "{{ cookiecutter.project_name }}"
@@ -39,7 +48,7 @@ def main():
     )
 
     # remove the temporary parent folder
-    shutil.rmtree(os.path.join('../', project_name), ignore_errors=True)
+    remove_parent_project_folder(project_name)
 
     print()
     print("-----------------------")
