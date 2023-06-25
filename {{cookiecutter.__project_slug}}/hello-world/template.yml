@@ -10,7 +10,7 @@ Globals:
     Runtime: provided.al2
     MemorySize: 512
     Architectures:
-      - {{ cookiecutter.architecture }}
+      - {{ cookiecutter.__architecture }}
 
 Resources:
   # Lambda function
