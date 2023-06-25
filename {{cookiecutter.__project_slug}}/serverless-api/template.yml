@@ -11,7 +11,7 @@ Globals:
     Runtime: provided.al2
     MemorySize: 512
     Architectures:
-      - {{ cookiecutter.architecture }}
+      - {{ cookiecutter.__architecture }}
     Environment:
       Variables:
         TABLE_NAME: !Ref SwiftAPITable
