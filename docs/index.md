@@ -1,7 +1,7 @@
 # Server-side Swift on AWS with SAM
 
 <style type="text/css">
-    footer {
+    .footer {
         display: none !important;
     }
 </style>
