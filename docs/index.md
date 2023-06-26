@@ -44,5 +44,5 @@ This template creates a full REST API to add, update, select, and remove items i
 
 ## License
 
-This library is licensed under the MIT-0 License. See the [LICENSE](https://github.com/aws-samples/aws-sam-swift/blob/main/LICENSE) file in the projects code repository..
+This library is licensed under the MIT-0 License. See the [LICENSE](https://github.com/aws-samples/aws-sam-swift/blob/main/LICENSE) file in the project code repository.
 
