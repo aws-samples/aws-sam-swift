@@ -21,7 +21,7 @@ To deploy an application using SAM, you need an AWS account and the following to
 
 
 ## Create a Project
-Once you have the tools installed, use the *sam init* command to initialize a new project.
+Once you have the tools installed, from a command prompt on your machine, use the *sam init* command to initialize a new project.
 
 ``` bash
 sam init --location gh:aws-samples/aws-sam-swift
@@ -29,7 +29,7 @@ sam init --location gh:aws-samples/aws-sam-swift
 
 When prompted, specify a name for your project and select the template for the type of project you want to generate. Then switch to the project's folder. 
 
-Instructions to build and deploy the application are located in the **README.md** file of the generated project.
+Application specific instructions to build, deploy, and use the application are located in the **README.md** file of the generated project.
 
 ## Project Templates
 The tool currently supports two templates. Check back often, as we intend to add new templates regularly.
