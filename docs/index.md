@@ -1,11 +1,13 @@
 # Server-side Swift on AWS with SAM
 
-This project contains a Cookiecutter template to create a serverless application based on the [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html) and Swift.
+The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html) is an open-source framework for building serverless applications. This page shows you how to use SAM to deploy Server-side Swift applications to AWS.
+
+Each application uses [AWS Lambda](https://aws.amazon.com/lambda/) Functions written in Swift. The functions use the [AWS SDK for Swift](https://docs.aws.amazon.com/sdk-for-swift/latest/developer-guide/getting-started.html) and the [Swift AWS Lambda Runtime](https://github.com/swift-server/swift-aws-lambda-runtime).
 
 
 ## Get the Tools
 
-To deploy an application based on this template, you need an AWS account and the following tools on your development machine. While it may work with alternative versions, we recommend you deploy the specified minimum version.
+To deploy an application using SAM, you need an AWS account and the following tools on your development machine. While it may work with alternative versions, we recommend you deploy the specified minimum version.
 
 * [AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) (^2.4.19) the AWS CLI is used to configure the AWS credentials on your development machine.
 * [SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (^1.82.0)
@@ -13,6 +15,7 @@ To deploy an application based on this template, you need an AWS account and the
 
 
 ## Create a Project
+Once you have the tools installed, use the *sam init* command to initialize a new project.
 
 ``` bash
 sam init --location gh:aws-samples/aws-sam-swift
@@ -22,11 +25,18 @@ When prompted, specify a name for your project and select the template for the t
 
 Instructions to build and deploy the application are located in the **README.md** file of the generated project.
 
-## Security
+## Project Templates
+The tool currently supports two templates. Check back often, as we intend to add new templates regularly.
 
-See [CONTRIBUTING](../CONTRIBUTING.md.md#security-issue-notifications) for more information.
+**Hello World**
+
+This template creates a basic Lambda function that returns a welcome message. It also creates an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) REST endpoint to invoke your function.
+
+**Serverless API**
+
+This template creates a full REST API to add, update, select, and remove items in an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) database. An API Gateway uses Lambda functions to handle each action.
 
 ## License
 
-This library is licensed under the MIT-0 License. See the [LICENSE](../LICENSE) file.
+This library is licensed under the MIT-0 License. See the [LICENSE](https://github.com/aws-samples/aws-sam-swift/blob/main/LICENSE) file in the projects code repository..
 
