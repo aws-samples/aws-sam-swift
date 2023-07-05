@@ -1,4 +1,4 @@
-# Server-side Swift on AWS with SAM
+![Image description](assets/images/banner.png)
 
 <style type="text/css">
     .footer {
