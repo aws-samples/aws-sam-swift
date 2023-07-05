@@ -4,16 +4,16 @@ layout: default
 
 ![Image description](assets/images/banner.png)
 
-The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html){:target="_blank"} is an open-source framework for building serverless applications. This page shows you how to use SAM to deploy Server-side Swift applications to AWS. Each application uses [AWS Lambda](https://aws.amazon.com/lambda/) Functions written in Swift. The functions use the [AWS SDK for Swift](https://docs.aws.amazon.com/sdk-for-swift/latest/developer-guide/getting-started.html) and the [Swift AWS Lambda Runtime](https://github.com/swift-server/swift-aws-lambda-runtime).
+The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html){:target="_blank"} is an open-source framework for building serverless applications. This page shows you how to use SAM to deploy Server-side Swift applications to AWS. Each application uses [AWS Lambda](https://aws.amazon.com/lambda/){:target="_blank"} Functions written in Swift. The functions use the [AWS SDK for Swift](https://docs.aws.amazon.com/sdk-for-swift/latest/developer-guide/getting-started.html){:target="_blank"} and the [Swift AWS Lambda Runtime](https://github.com/swift-server/swift-aws-lambda-runtime){:target="_blank"}.
 
 
 ## Get the Tools
 
 To deploy an application using SAM, you need an AWS account and the following tools on your development machine. While it may work with alternative versions, we recommend you deploy the specified minimum version.
 
-* [AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) (^2.4.19) the AWS CLI is used to configure the AWS credentials on your development machine.
-* [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (^1.82.0)
-* [Docker](https://www.docker.com/products/docker-desktop) (^24.0) SAM uses Docker to compile the Swift Lambda functions for Linux distribution to AWS Lambda.
+* [AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html){:target="_blank"} (^2.4.19) the AWS CLI is used to configure the AWS credentials on your development machine.
+* [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html){:target="_blank"} (^1.82.0)
+* [Docker](https://www.docker.com/products/docker-desktop){:target="_blank"} (^24.0) SAM uses Docker to compile the Swift Lambda functions for Linux distribution to AWS Lambda.
 
 
 ## Create a Project
@@ -30,11 +30,11 @@ Application specific instructions to build, deploy, and use the application are 
 ## Project Templates
 The tool currently supports two templates. Check back often, as we intend to add new templates regularly.
 
-- **Hello World** creates a basic Lambda function that returns a welcome message. It also creates an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) REST endpoint to invoke your function.
+- **Hello World** creates a basic Lambda function that returns a welcome message. It also creates an [Amazon API Gateway](https://aws.amazon.com/api-gateway/){:target="_blank"} REST endpoint to invoke your function.
 
-- **Serverless API** creates a full REST API to add, update, select, and remove items in an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) database. An API Gateway uses Lambda functions to handle each action.
+- **Serverless API** creates a full REST API to add, update, select, and remove items in an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/){:target="_blank"} database. An API Gateway uses Lambda functions to handle each action.
 
 ## License
 
-This library is licensed under the MIT-0 License. See the [LICENSE](https://github.com/aws-samples/aws-sam-swift/blob/main/LICENSE) file in the project code repository.
+This library is licensed under the MIT-0 License. See the [LICENSE](https://github.com/aws-samples/aws-sam-swift/blob/main/LICENSE){:target="_blank"} file in the project code repository.
 
