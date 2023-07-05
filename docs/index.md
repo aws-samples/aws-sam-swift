@@ -4,9 +4,7 @@ layout: default
 
 ![Image description](assets/images/banner.png)
 
-The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html) is an open-source framework for building serverless applications. This page shows you how to use SAM to deploy Server-side Swift applications to AWS.
-
-Each application uses [AWS Lambda](https://aws.amazon.com/lambda/) Functions written in Swift. The functions use the [AWS SDK for Swift](https://docs.aws.amazon.com/sdk-for-swift/latest/developer-guide/getting-started.html) and the [Swift AWS Lambda Runtime](https://github.com/swift-server/swift-aws-lambda-runtime).
+The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html) is an open-source framework for building serverless applications. This page shows you how to use SAM to deploy Server-side Swift applications to AWS. Each application uses [AWS Lambda](https://aws.amazon.com/lambda/) Functions written in Swift. The functions use the [AWS SDK for Swift](https://docs.aws.amazon.com/sdk-for-swift/latest/developer-guide/getting-started.html) and the [Swift AWS Lambda Runtime](https://github.com/swift-server/swift-aws-lambda-runtime).
 
 
 ## Get the Tools
@@ -14,8 +12,8 @@ Each application uses [AWS Lambda](https://aws.amazon.com/lambda/) Functions wri
 To deploy an application using SAM, you need an AWS account and the following tools on your development machine. While it may work with alternative versions, we recommend you deploy the specified minimum version.
 
 * [AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) (^2.4.19) the AWS CLI is used to configure the AWS credentials on your development machine.
-* [SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (^1.82.0)
-* [Docker Desktop](https://www.docker.com/products/docker-desktop) (^4.19) SAM uses Docker to compile the Swift Lambda functions for Linux disribution to AWS Lambda.
+* [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (^1.82.0)
+* [Docker](https://www.docker.com/products/docker-desktop) (^24.0) SAM uses Docker to compile the Swift Lambda functions for Linux distribution to AWS Lambda.
 
 
 ## Create a Project
@@ -32,13 +30,9 @@ Application specific instructions to build, deploy, and use the application are 
 ## Project Templates
 The tool currently supports two templates. Check back often, as we intend to add new templates regularly.
 
-**Hello World**
+- **Hello World** creates a basic Lambda function that returns a welcome message. It also creates an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) REST endpoint to invoke your function.
 
-This template creates a basic Lambda function that returns a welcome message. It also creates an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) REST endpoint to invoke your function.
-
-**Serverless API**
-
-This template creates a full REST API to add, update, select, and remove items in an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) database. An API Gateway uses Lambda functions to handle each action.
+- **Serverless API** creates a full REST API to add, update, select, and remove items in an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) database. An API Gateway uses Lambda functions to handle each action.
 
 ## License
 
