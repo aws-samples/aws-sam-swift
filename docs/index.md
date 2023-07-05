@@ -4,7 +4,7 @@ layout: default
 
 ![Image description](assets/images/banner.png)
 
-The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html) is an open-source framework for building serverless applications. This page shows you how to use SAM to deploy Server-side Swift applications to AWS. Each application uses [AWS Lambda](https://aws.amazon.com/lambda/) Functions written in Swift. The functions use the [AWS SDK for Swift](https://docs.aws.amazon.com/sdk-for-swift/latest/developer-guide/getting-started.html) and the [Swift AWS Lambda Runtime](https://github.com/swift-server/swift-aws-lambda-runtime).
+The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html){:target="_blank"} is an open-source framework for building serverless applications. This page shows you how to use SAM to deploy Server-side Swift applications to AWS. Each application uses [AWS Lambda](https://aws.amazon.com/lambda/) Functions written in Swift. The functions use the [AWS SDK for Swift](https://docs.aws.amazon.com/sdk-for-swift/latest/developer-guide/getting-started.html) and the [Swift AWS Lambda Runtime](https://github.com/swift-server/swift-aws-lambda-runtime).
 
 
 ## Get the Tools
