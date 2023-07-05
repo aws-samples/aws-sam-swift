@@ -1,10 +1,8 @@
-![Image description](assets/images/banner.png)
+---
+layout: default
+---
 
-<style type="text/css">
-    .footer {
-        display: none !important;
-    }
-</style>
+![Image description](assets/images/banner.png)
 
 The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html) is an open-source framework for building serverless applications. This page shows you how to use SAM to deploy Server-side Swift applications to AWS.
 
