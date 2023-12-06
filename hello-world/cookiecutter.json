@@ -1,0 +1,14 @@
+{
+  "project_name": "Swift Hello World on AWS",
+  "__project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+  "__architecture": "{{ 'x86_64'|architecture }}",
+  "_copy_without_render": [
+    ".gitignore"
+],
+  "_template_name": "Hello World",
+  "_runtime": "Swift 5.8",
+  "_swift_tools_version": "5.8",
+  "_swift_builder_image": "public.ecr.aws/docker/library/swift:5.8.0-amazonlinux2",
+  "_aws_swift_sdk_version": "0.32.0",
+  "_extensions": ["local_extensions.architecture"]
+}

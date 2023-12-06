@@ -1,17 +1,14 @@
 {
-  "project_name": "My Swift Project",
-  "__project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
-  "__architecture": "{{ 'x86_64'|architecture }}",
-  "template": [
-    "Hello World",
-    "Serverless API"
-  ],
-  "_copy_without_render": [
-    ".gitignore"
-],
-"_runtime": "Swift 5.8",
-"_swift_tools_version": "5.8",
-"_swift_builder_image": "public.ecr.aws/docker/library/swift:5.8.0-amazonlinux2",
-"_aws_swift_sdk_version": "0.19.0",
-"_extensions": ["local_extensions.architecture"]
+  "templates": {
+      "hello-world": {
+          "path": "./hello-world",
+          "title": "Hello World",
+          "description": "Generate a Hello World app using Swift on AWS"
+      },
+      "serverless-api": {
+          "path": "./serverless-api",
+          "title": "Serverless API",
+          "description": "Generate a Serverless API using Swift on AWS"
+      }
+  }
 }

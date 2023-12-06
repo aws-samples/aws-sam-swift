@@ -12,9 +12,10 @@ The [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverl
 To deploy an application using SAM, you need an AWS account and the following tools on your development machine. While it may work with alternative versions, we recommend you deploy the specified minimum version.
 
 * [AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html){:target="_blank"} (^2.4.19) the AWS CLI is used to configure the AWS credentials on your development machine.
-* [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html){:target="_blank"} (^1.82.0)
+* [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html){:target="_blank"} (^1.103.0)
 * [Docker](https://www.docker.com/products/docker-desktop){:target="_blank"} (^24.0) SAM uses Docker to compile the Swift Lambda functions for Linux distribution to AWS Lambda.
 
+**Note**: *make sure you upgrade to **SAM CLI** version **1.103.0** or later. These templates will only work with that version of SAM or greater.*
 
 ## Create a Project
 Once you have the tools installed, from a command prompt on your machine, use the *sam init* command to initialize a new project.
