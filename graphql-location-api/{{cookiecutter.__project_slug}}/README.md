@@ -49,11 +49,11 @@ Outputs
 ------------------------------------------------------------------------------------------------------------
 Key                 APIEndpointValue
 Description         AppSync API Endpoint
-Value               https://xxxxxxxxxxxxxxx.appsync-api.[region].amazonaws.com/graphql
+Value               [your-api-endpoint]
 
 Key                 ApiKeyValue
 Description         API Key
-Value               [your api key]
+Value               [your-api-key]
 
 ------------------------------------------------------------------------------------------------------------
 ```
@@ -136,7 +136,7 @@ Your message is displayed in real-time in the results panel of the Query Explore
 
 
 ## Test the API Locally
-SAM also allows you to execute your Lambda functions locally on your development computer. Follow these instructions to execute each Lambda function. Further capabilities can be explored in the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html).
+SAM allows you to test your Lambda functions locally on your development machine. Follow these instructions to execute each Lambda function. Further capabilities can be explored in the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html).
 
 
 **Event Files**
