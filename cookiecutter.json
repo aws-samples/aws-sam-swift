@@ -3,12 +3,17 @@
       "hello-world": {
           "path": "./hello-world",
           "title": "Hello World",
-          "description": "Generate a Hello World app using Swift on AWS"
+          "description": "Hello World app using Swift on AWS"
       },
       "serverless-api": {
           "path": "./serverless-api",
           "title": "Serverless API",
-          "description": "Generate a Serverless API using Swift on AWS"
+          "description": "Serverless REST API using Swift on AWS"
+      },
+      "graphql-location-api": {
+          "path": "./graphql-location-api",
+          "title": "GraphQL Location Services API",
+          "description": "Serverless GraphQL API with AWS AppSync and Amazon Location Service"
       }
   }
 }

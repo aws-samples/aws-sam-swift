@@ -35,6 +35,8 @@ The tool currently supports two templates. Check back often, as we intend to add
 
 - **Serverless API** creates a full REST API to add, update, select, and remove items in an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/){:target="_blank"} database. An API Gateway uses Lambda functions to handle each action.
 
+- **GraphQL API with Location Services** creates an [AWS AppSync](https://aws.amazon.com/pm/appsync/) GraphQL API that queries location data from the [Amazon Location Service](https://aws.amazon.com/pm/location){:target="_blank"}. It also queries weather data from a 3rd party weather API.
+
 ## License
 
 This library is licensed under the MIT-0 License. See the [LICENSE](https://github.com/aws-samples/aws-sam-swift/blob/main/LICENSE){:target="_blank"} file in the project code repository.
