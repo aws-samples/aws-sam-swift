@@ -31,11 +31,11 @@ Application specific instructions to build, deploy, and use the application are 
 ## Project Templates
 The tool supports these templates.
 
-- **Hello World** creates a basic Lambda function that returns a welcome message. It also creates an [Amazon API Gateway](https://aws.amazon.com/api-gateway/){:target="_blank"} REST endpoint to invoke your function.
+- **Hello World** creates a basic Lambda function written in Swift that returns a welcome message. It also creates an [Amazon API Gateway](https://aws.amazon.com/api-gateway/){:target="_blank"} REST endpoint to invoke your function.
 
-- **Serverless API** creates a full REST API to add, update, select, and remove items in an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/){:target="_blank"} database. An API Gateway uses Lambda functions to handle each action.
+- **REST API** creates a full REST API using [Amazon API Gateway](https://aws.amazon.com/api-gateway/){:target="_blank"} to add, update, select, and remove items in an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/){:target="_blank"} database. API Gateway uses Lambda functions written in Swift to handle each action.
 
-- **GraphQL API with Location Services** creates an [AWS AppSync](https://aws.amazon.com/appsync/){:target="_blank"} GraphQL API that queries location data from the [Amazon Location Service](https://aws.amazon.com/location/){:target="_blank"}. It also queries weather data from a 3rd party weather API.
+- **GraphQL API** creates an [AWS AppSync](https://aws.amazon.com/appsync/){:target="_blank"} GraphQL API that queries location data from the [Amazon Location Service](https://aws.amazon.com/location/){:target="_blank"}. It also queries weather data from a 3rd party weather API. AppSync uses Lambda functions written in Swift to handle each action.
 
 ## License
 
