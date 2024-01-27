@@ -29,7 +29,7 @@ When prompted, specify a name for your project and select the template for the t
 Application specific instructions to build, deploy, and use the application are located in the **README.md** file of the generated project.
 
 ## Project Templates
-The tool currently supports two templates. Check back often, as we intend to add new templates regularly.
+The tool supports these templates.
 
 - **Hello World** creates a basic Lambda function that returns a welcome message. It also creates an [Amazon API Gateway](https://aws.amazon.com/api-gateway/){:target="_blank"} REST endpoint to invoke your function.
 
