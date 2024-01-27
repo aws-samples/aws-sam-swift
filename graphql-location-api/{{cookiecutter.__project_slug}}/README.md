@@ -38,7 +38,7 @@ Deploying your SAM project creates the Lambda functions, AppSync GraphQL API, an
 sam deploy --guided
 ```
 
-Accept the default response to every prompt.
+Accept the default response to every prompt. If you want to deploy to a region other than *us-east-1* specify the region when prompted.
 
 ## Use the API
 
@@ -113,7 +113,7 @@ curl \
 [your-api-endpoint]
 ```
 
-### Send a Message
+### Send a Real-Time Message
 
 GraphQL has the capability to send and receive real-time messages between clients called *Subscriptions*.
 
@@ -129,7 +129,7 @@ curl \
 -H "x-api-key: [your-api-key]" \
 -H "Content-Type: application/json" \
 -d '{ "query": "mutation { createMessage(recipient: \"user1\", text: \"Hello\") { id recipient text timestamp } }" }' \
-https://[your-graphql-endpoint]/graphql
+[your-api-endpoint]
 ```
 
 Your message is displayed in real-time in the results panel of the Query Explorer.
