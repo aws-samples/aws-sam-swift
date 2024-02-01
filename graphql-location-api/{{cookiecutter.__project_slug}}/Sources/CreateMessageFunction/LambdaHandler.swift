@@ -28,13 +28,13 @@ struct CreateMessageFunction: SimpleLambdaHandler {
         print("received event: \(event)")
 
         let dateFormatter = DateFormatter();
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS" 
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" 
 
         return Message(
             recipient: event.arguments.recipient,
             text: event.arguments.text,
             id: UUID().uuidString,
-            timestamp: "\(dateFormatter.string(from: Date.now))Z"
+            timestamp: dateFormatter.string(from: Date.now)
         )
     }
 }
