@@ -38,11 +38,11 @@ sam deploy --guided
 Accept the default response to every prompt, except the following warnings:
 
 ```bash
-CreateItem may not have authorization defined, Is this okay? [y/N]: y
-GetItems may not have authorization defined, Is this okay? [y/N]: y
-GetItem may not have authorization defined, Is this okay? [y/N]: y
-UpdateItem may not have authorization defined, Is this okay? [y/N]: y
-DeleteItem may not have authorization defined, Is this okay? [y/N]: y
+CreateItem has no authentication. Is this okay? [y/N]: y
+GetItems has no authentication. Is this okay? [y/N]: y
+GetItem has no authentication. Is this okay? [y/N]: y
+UpdateItem has no authentication. Is this okay? [y/N]: y
+DeleteItem has no authentication. Is this okay? [y/N]: y
 ```
 
 The project creates a publicly accessible API endpoint. These are warnings to inform you the API does not have authorization. If you are interested in adding authorization to the API, please refer to the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-httpapi.html).

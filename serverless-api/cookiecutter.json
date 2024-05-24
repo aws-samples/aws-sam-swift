@@ -6,9 +6,9 @@
     ".gitignore"
 ],
 "_template_name": "Serverless API",
-"_runtime": "Swift 5.8",
-"_swift_tools_version": "5.8",
-"_swift_builder_image": "public.ecr.aws/docker/library/swift:5.8.0-amazonlinux2",
-"_aws_swift_sdk_version": "0.32.0",
+"_runtime": "Swift 5.9",
+"_swift_tools_version": "5.9",
+"_swift_builder_image": "public.ecr.aws/docker/library/swift:5.9.1-amazonlinux2",
+"_aws_swift_sdk_version": "0.44.0",
 "_extensions": ["local_extensions.architecture"]
 }

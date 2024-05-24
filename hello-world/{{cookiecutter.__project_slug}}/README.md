@@ -31,7 +31,7 @@ sam deploy --guided
 Accept the default response to every prompt, except the following warning:
 
 ```bash
-HelloWorld may not have authorization defined, Is this okay? [y/N]: y
+HelloWorld has no authentication. Is this okay? [y/N]: y
 ```
 
 The project creates a publicly accessible API endpoint. This is a warning to inform you the API does not have authorization. If you are interested in adding authorization to the API, please refer to the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-httpapi.html).
