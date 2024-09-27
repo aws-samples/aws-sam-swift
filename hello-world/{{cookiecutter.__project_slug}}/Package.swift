@@ -10,9 +10,7 @@ let package = Package(
         .executable(name: "HelloWorld", targets: ["HelloWorld"])
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-server/swift-aws-lambda-runtime", branch: "main"),
-        .package(url: "https://github.com/swift-server/swift-aws-lambda-events", branch: "main"),
-        .package(url: "https://github.com/awslabs/aws-sdk-swift", from: "{{ cookiecutter._aws_swift_sdk_version }}")
+        .package(url: "https://github.com/swift-server/swift-aws-lambda-runtime", from: "{{ cookiecutter._swift_aws_lambda_runtime_version }}"),
     ],
     targets: [
         .executableTarget(
