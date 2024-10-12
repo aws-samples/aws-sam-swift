@@ -5,12 +5,12 @@ import PackageDescription
 
 let package = Package(
     name: "aws-swift-app",
-    platforms: [.macOS(.v12)],
+    platforms: [{{ cookiecutter._mac_os_version }}],
     products: [
         .executable(name: "HelloWorld", targets: ["HelloWorld"])
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-server/swift-aws-lambda-runtime", from: "{{ cookiecutter._swift_aws_lambda_runtime_version }}"),
+        .package(url: "https://github.com/swift-server/swift-aws-lambda-runtime", {{ cookiecutter._swift_aws_lambda_runtime_version }}),
     ],
     targets: [
         .executableTarget(

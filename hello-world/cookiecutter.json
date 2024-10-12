@@ -7,7 +7,8 @@
   "_runtime": "Swift 6.0",
   "_swift_tools_version": "6.0",
   "_swift_builder_image": "public.ecr.aws/docker/library/swift:6.0.1-amazonlinux2",
+  "_mac_os_version": ".macOS(.v15)",
   "_aws_swift_sdk_version": "1.0.7",
-  "_swift_aws_lambda_runtime_version": "1.0.0-alpha.3",
+  "_swift_aws_lambda_runtime_version": "branch: \"main\"",
   "_extensions": ["local_extensions.architecture"]
 }
