@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "aws-swift-app",
-    platforms: [.macOS(.v12)],
+    platforms: [{{ cookiecutter._mac_os_version }}],
     products: [
         .executable(name: "CreateItem", targets: ["CreateItem"]),
         .executable(name: "GetItems", targets: ["GetItems"]),

@@ -2,7 +2,7 @@
 import Foundation
 import AWSLambdaRuntime
 import AWSLambdaEvents
-import AWSDynamoDB
+@preconcurrency import AWSDynamoDB
 
 // define Codable struct for function response
 struct Item : Codable {
@@ -10,27 +10,26 @@ struct Item : Codable {
     let itemName: String
 }
 
+
 enum FunctionError: Error {
-    case envError
-    case apiError
+    case appError
 }
 
-@main
-struct UpdateItem: SimpleLambdaHandler {
+let client = try await DynamoDBClient()
 
-    // Lambda Function handler
-    func handle(_ event: APIGatewayV2Request, context: LambdaContext) async throws -> Item {
-        
-        print("events received:\(event)")
-        
-        // create a client to interact with DynamoDB
-        let client = try await DynamoDBClient()
+let runtime = LambdaRuntime {
+    (event: APIGatewayV2Request, context: LambdaContext) async throws -> APIGatewayV2Response in
 
-        // obtain DynamoDB table name from function's environment variables
-        guard let tableName = ProcessInfo.processInfo.environment["TABLE_NAME"] else {
-            throw FunctionError.envError
-        }
+    print("event received:\(event)")
 
+    // obtain DynamoDB table name from function's environment variables
+    guard let tableName = ProcessInfo.processInfo.environment["TABLE_NAME"] else {
+        throw FunctionError.appError
+    }
+
+    var response: APIGatewayV2Response
+
+    do {
         // decode data from APIGateway POST into a codable struct
         var item = try JSONDecoder().decode(
             Item.self, 
@@ -60,6 +59,17 @@ struct UpdateItem: SimpleLambdaHandler {
         
         _ = try await client.updateItem(input: input)
 
-        return item
+        response = APIGatewayV2Response(
+            statusCode: .ok, 
+            body: String(data: try JSONEncoder().encode(item), encoding: .utf8)!
+        )
+
+    } catch {
+        context.logger.error("\(error)")
+        response = APIGatewayV2Response(statusCode: .internalServerError, body: "[ERROR] \(error)")
     }
+
+    return response
 }
+
+try await runtime.run()

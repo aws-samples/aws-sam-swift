@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: SAM Template for {{ cookiecutter.project_name }}
 
@@ -6,7 +6,6 @@ Description: SAM Template for {{ cookiecutter.project_name }}
 Globals:
   Function:
     Timeout: 60
-    CodeUri: .
     Handler: swift.bootstrap
     Runtime: provided.al2
     MemorySize: 512
@@ -29,6 +28,7 @@ Resources:
   CreateItem:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/CreateItem/CreateItem.zip
       Policies:
         # allow function to read and write to database table
         - DynamoDBCrudPolicy:
@@ -40,13 +40,12 @@ Resources:
           Properties:
             Method: post
             Path: /item
-    Metadata:
-      BuildMethod: makefile
 
   # Lambda function to retrieve items from database
   GetItems:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/GetItems/GetItems.zip
       Policies:
         # allow function to read and write to database table
         - DynamoDBCrudPolicy:
@@ -58,13 +57,12 @@ Resources:
           Properties:
             Method: get
             Path: /items
-    Metadata:
-      BuildMethod: makefile
 
   # Lambda function to retrieve single item from database
   GetItem:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/GetItem/GetItem.zip
       Policies:
         # allow function to read and write to database table
         - DynamoDBCrudPolicy:
@@ -76,13 +74,12 @@ Resources:
           Properties:
             Method: get
             Path: /item/{id}
-    Metadata:
-      BuildMethod: makefile
 
   # Lambda function to update single item in database
   UpdateItem:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/UpdateItem/UpdateItem.zip
       Policies:
         # allow function to read and write to database table
         - DynamoDBCrudPolicy:
@@ -94,13 +91,12 @@ Resources:
           Properties:
             Method: put
             Path: /item/{id}
-    Metadata:
-      BuildMethod: makefile
 
   # Lambda function to delete single item in database
   DeleteItem:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/DeleteItem/DeleteItem.zip
       Policies:
         # allow function to read and write to database table
         - DynamoDBCrudPolicy:
@@ -112,8 +108,6 @@ Resources:
           Properties:
             Method: delete
             Path: /item/{id}
-    Metadata:
-      BuildMethod: makefile
 
 # print API endpoint and name of database table
 Outputs:

@@ -2,13 +2,13 @@
   "project_name": "Swift Serverless API on AWS",
   "__project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
   "__architecture": "{{ 'x86_64'|architecture }}",
-  "_copy_without_render": [
-    ".gitignore"
-],
-"_template_name": "Serverless API",
-"_runtime": "Swift 5.9",
-"_swift_tools_version": "5.9",
-"_swift_builder_image": "public.ecr.aws/docker/library/swift:5.9.1-amazonlinux2",
-"_aws_swift_sdk_version": "0.44.0",
-"_extensions": ["local_extensions.architecture"]
+  "_copy_without_render": [".gitignore"],
+  "_template_name": "Serverless API",
+  "_runtime": "Swift 6.0",
+  "_swift_tools_version": "6.0",
+  "_swift_builder_image": "public.ecr.aws/docker/library/swift:6.0.2-amazonlinux2",
+  "_mac_os_version": ".macOS(.v15)",
+  "_aws_swift_sdk_version": "1.0.42",
+  "_swift_aws_lambda_runtime_version": "branch: \"main\"",
+  "_extensions": ["local_extensions.architecture"]
 }

@@ -18,10 +18,17 @@ To build this sample application, you need:
 - [AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) - install the CLI and [configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) it with credentials to your AWS account
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) - a command-line tool used to create serverless workloads on AWS
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) - to compile your Swift code for Linux deployment to AWS Lambda
+- [Swift](https://www.swift.org/getting-started/) version 6.0
 
 ## Build the application
 
-The **sam build** command uses Docker to compile your Swift Lambda functions and package them for deployment to AWS.
+The **swift package archive** command compiles your Swift code for deployment to Lambda.
+
+```
+swift package archive --allow-network-connections docker
+```
+
+The **sam build** command packages your Swift Lambda functions and package them for deployment to AWS.
 
 ```bash
 sam build
@@ -60,7 +67,7 @@ Value               https://[your-api-id].execute-api.[your-aws-region].amazonaw
 
 Key                 SwiftAPITable
 Description         DynamoDB Table Name
-Value               sam-app-SwiftAPITable-[table id]     
+Value               sam-app-SwiftAPITable-[table id]
 ----------------------------------------------------------------------------------------
 ```
 
@@ -80,7 +87,7 @@ curl https://[your-api-endpoint]/items
 
 **Retrieve a specific To Do List item**
 
-*Replace [item id] with the id of the item you want to retrieve*
+_Replace [item id] with the id of the item you want to retrieve_
 
 ```bash
 curl https://[your-api-endpoint]/item/[item id]
@@ -88,7 +95,7 @@ curl https://[your-api-endpoint]/item/[item id]
 
 **Update a specific To Do List item**
 
-*Replace [item id] with the id of the item you want to update*
+_Replace [item id] with the id of the item you want to update_
 
 ```bash
 curl --request PUT https://[your-api-endpoint]/item/[item id] --header 'Content-Type: application/json' --data-raw '{"itemName": "my updated todo item"}'
@@ -96,18 +103,20 @@ curl --request PUT https://[your-api-endpoint]/item/[item id] --header 'Content-
 
 **Delete a specific To Do List item**
 
-*Replace [item id] with the id of the item you want to delete*
+_Replace [item id] with the id of the item you want to delete_
 
 ```bash
 curl --request DELETE https://[your-api-endpoint]/item/[item id]
 ```
 
 ## Test the API Locally
+
 SAM also allows you to execute your Lambda functions locally on your development computer. Follow these instructions to execute each Lambda function. Further capabilities can be explored in the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html).
 
-First, you must update the **env.json** file to specify the name of the DynamoDB table that SAM created in your AWS account. This value was output at the end of the *sam deploy* step.  This file sets the environment variables passed to the Lambda function at runtime. The functions use this environment variable to identify the name of the DynamoDB table in which to store your data.
+First, you must update the **env.json** file to specify the name of the DynamoDB table that SAM created in your AWS account. This value was output at the end of the _sam deploy_ step. This file sets the environment variables passed to the Lambda function at runtime. The functions use this environment variable to identify the name of the DynamoDB table in which to store your data.
 
 **env.json**
+
 ```
 {
   "Parameters": {
@@ -138,7 +147,7 @@ sam local invoke CreateItem --env-vars env.json --event events/CreateItem.json
 
 **Retrieve all To Do List items**
 
-*you do not have to update the events/GetItems.json as the function does not utilize any variable parameters*
+_you do not have to update the events/GetItems.json as the function does not utilize any variable parameters_
 
 ```bash
 sam local invoke GetItems --env-vars env.json --event events/GetItems.json
@@ -171,9 +180,9 @@ events/UpdateItem.json
 ```json
 {
   "pathParameters": {
-        "id": "id-of-the-item-to-update"
+    "id": "id-of-the-item-to-update"
   },
-  "body": "{\"itemName\": \"Updated Item Name\"}",
+  "body": "{\"itemName\": \"Updated Item Name\"}"
 }
 ```
 
