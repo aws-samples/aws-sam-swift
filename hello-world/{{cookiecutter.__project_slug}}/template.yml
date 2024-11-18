@@ -1,11 +1,10 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: SAM Template for {{ cookiecutter.project_name }}
 
 Globals:
   Function:
     Timeout: 60
-    CodeUri: .
     Handler: swift.bootstrap
     Runtime: provided.al2
     MemorySize: 512
@@ -17,6 +16,7 @@ Resources:
   HelloWorld:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/HelloWorld/HelloWorld.zip
       Events:
         # handles the GET / method of the REST API
         Api:
@@ -24,12 +24,9 @@ Resources:
           Properties:
             Method: get
             Path: /
-    Metadata:
-      BuildMethod: makefile
 
 # print API endpoint and name of database table
 Outputs:
   SwiftAPIEndpoint:
     Description: "API Gateway endpoint URL for your application"
     Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
-

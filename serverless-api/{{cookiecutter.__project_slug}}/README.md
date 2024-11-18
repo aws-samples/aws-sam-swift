@@ -28,7 +28,7 @@ The **swift package archive** command compiles your Swift code for deployment to
 swift package archive --allow-network-connections docker
 ```
 
-The **sam build** command packages your Swift Lambda functions and package them for deployment to AWS.
+The **sam build** command packages your Swift Lambda functions for deployment to AWS.
 
 ```bash
 sam build

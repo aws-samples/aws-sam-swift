@@ -2,7 +2,6 @@
 
 This application illustrates how to deploy a Server-Side Swift workload on AWS using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/) toolkit. The workload is a simple REST API that returns a string from an Amazon API Gateway. Requests to the API Gateway endpoint are handled by an AWS Lambda Function written in Swift.
 
-
 ## Prerequisites
 
 To build this sample application, you need:
@@ -14,7 +13,13 @@ To build this sample application, you need:
 
 ## Build the application
 
-The **sam build** command uses Docker to compile your Swift Lambda function and package it for deployment to AWS.
+The **swift package archive** command compiles your Swift code for deployment to Lambda.
+
+```
+swift package archive --allow-network-connections docker
+```
+
+The **sam build** command packages your Swift Lambda functions for deployment to AWS.
 
 ```bash
 sam build
@@ -58,8 +63,8 @@ curl https://[your-api-endpoint]
 ```
 
 ## Test the API Locally
-SAM also allows you to execute your Lambda functions locally on your development computer. Follow these instructions to execute the Lambda function locally. Further capabilities can be explored in the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html).
 
+SAM also allows you to execute your Lambda functions locally on your development computer. Follow these instructions to execute the Lambda function locally. Further capabilities can be explored in the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html).
 
 **Event Files**
 
