@@ -5,7 +5,6 @@ Description: SAM Template for {{ cookiecutter.project_name }}
 Globals:
   Function:
     Timeout: 60
-    CodeUri: .
     Handler: swift.bootstrap
     Runtime: provided.al2
     MemorySize: 512
@@ -16,6 +15,7 @@ Resources:
   GetCityFunction:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/GetCityFunction/GetCityFunction.zip
       Policies:
       - Statement:
         - Sid: LocationServicesPolicy
@@ -26,12 +26,11 @@ Resources:
       Environment:
         Variables:
           PLACE_INDEX_NAME: !Ref PlaceIndex
-    Metadata:
-      BuildMethod: makefile
 
   GetPlacesFunction:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/GetPlacesFunction/GetPlacesFunction.zip
       Policies:
       - Statement:
         - Sid: LocationServicesPolicy
@@ -42,12 +41,11 @@ Resources:
       Environment:
         Variables:
           PLACE_INDEX_NAME: !Ref PlaceIndex
-    Metadata:
-      BuildMethod: makefile
 
   GetWeatherFunction:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/GetWeatherFunction/GetWeatherFunction.zip
       Policies:
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn:
@@ -56,13 +54,11 @@ Resources:
         Variables:
           API_KEY_SECRET_ARN: !Ref WeatherApiKeySecret
           API_ENDPOINT: 'https://api.airvisual.com/v2/nearest_city'
-    Metadata:
-      BuildMethod: makefile
 
   CreateMessageFunction:
     Type: AWS::Serverless::Function
-    Metadata:
-      BuildMethod: makefile
+    Properties:
+      CodeUri: .build/plugins/AWSLambdaPackager/outputs/AWSLambdaPackager/CreateMessageFunction/CreateMessageFunction.zip
 
   WeatherApiKeySecret:
     Type: AWS::SecretsManager::Secret

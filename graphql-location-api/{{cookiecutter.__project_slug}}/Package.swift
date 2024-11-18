@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "aws-swift-app",
-    platforms: [.macOS(.v12)],
+    platforms: [{{ cookiecutter._mac_os_version }}],
     products: [
         .executable(name: "GetCityFunction", targets: ["GetCityFunction"]),
         .executable(name: "GetPlacesFunction", targets: ["GetPlacesFunction"]),
@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/swift-server/swift-aws-lambda-runtime", branch: "main"),
-        .package(url: "https://github.com/swift-server/async-http-client", from: "1.20.1"),
+        .package(url: "https://github.com/swift-server/async-http-client", from: "1.23.1"),
         .package(url: "https://github.com/awslabs/aws-sdk-swift", from: "{{ cookiecutter._aws_swift_sdk_version }}")
     ],
     targets: [

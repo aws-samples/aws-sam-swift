@@ -1,7 +1,7 @@
 import AWSLambdaRuntime
 import AsyncHTTPClient
 import Foundation
-import AWSSecretsManager
+@preconcurrency import AWSSecretsManager
 
 //structure for Lambda Event arguments
 struct Event: Codable {
@@ -51,33 +51,6 @@ enum FunctionError: Error {
     case secretError
 }
 
-@main
-struct GetWeatherFunction: SimpleLambdaHandler {
-
-    // function handler
-    func handle(_ event: Event, context: LambdaContext) async throws -> WeatherIndex {
-
-        print("received event: \(event)")
-
-        // get lambda function environment variables for api endpoint and secret key name
-        let apiEndpoint = try getEnvVariable(name: "API_ENDPOINT")
-        let apiKeySecretArn = try getEnvVariable(name: "API_KEY_SECRET_ARN")
-
-        // lookup the api key in Secrets Manager
-        let apiKey = try await getAPIKey(secretId: apiKeySecretArn)
-     
-        // call the weather api to obtain temperature and air quality for the requested latitude and longitude
-        let response = try await callAPI(
-            apiEndpoint: apiEndpoint, 
-            apiKey: apiKey, 
-            latitude: event.arguments.latitude, 
-            longitude: event.arguments.longitude
-        )
-        
-        return response
-    }
-}
-
 // function to retrieve the api key from SecretsManager
 func getAPIKey (secretId: String) async throws -> String {
     
@@ -99,37 +72,31 @@ func getAPIKey (secretId: String) async throws -> String {
 // function to make a restfull call to the weather api
 func callAPI (apiEndpoint: String, apiKey: String, latitude: Double, longitude: Double) async throws -> WeatherIndex {
     
-    let httpClient = HTTPClient(eventLoopGroupProvider: .singleton)
-
     do {
         
         //construct the url for the air quality api call with the api key, latitude, and longitude
         let url = "\(apiEndpoint)?key=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
-        
-        // call the rest api
         let request = HTTPClientRequest(url: url)
-        let response = try await httpClient.execute(request, timeout: .seconds(30))
-        let body = try await response.body.collect(upTo: 1024 * 1024)
+        let response = try await HTTPClient.shared.execute(request, timeout: .seconds(30))
+        var body = try await response.body.collect(upTo: 1024 * 1024)
+        let data = Data(body.readBytes(length: body.readableBytes) ?? [])
 
         //decode the results of the air quality api call
-        let jsonResponse = try JSONDecoder().decode(APIRepsonse.self, from: body)
+        let jsonResponse = try JSONDecoder().decode(APIRepsonse.self, from: data)
         
         //convert the temperature from celsius to fahrenheight
         let temperature = round((jsonResponse.data.current.weather.tp * 9 / 5) + 32)
         
-        try await httpClient.shutdown()
-
         // return the output
         return WeatherIndex(
-                temperature: temperature,
-                aqIndex: jsonResponse.data.current.pollution.aqius,
-                latitude: latitude,
-                longitude: longitude
+            temperature: temperature,
+            aqIndex: jsonResponse.data.current.pollution.aqius,
+            latitude: latitude,
+            longitude: longitude
         )
     
     } catch {
         print("API Error: \(error)")
-        try await httpClient.shutdown()
         throw FunctionError.apiError
     }
 }
@@ -143,3 +110,29 @@ func getEnvVariable(name: String) throws -> String {
     
     return value
 }
+
+// Lambda Handler
+let runtime = LambdaRuntime {
+    (event: Event, context: LambdaContext) async throws -> WeatherIndex in
+
+    print("received event: \(event)")
+
+    // get lambda function environment variables for api endpoint and secret key name
+    let apiEndpoint = try getEnvVariable(name: "API_ENDPOINT")
+    let apiKeySecretArn = try getEnvVariable(name: "API_KEY_SECRET_ARN")
+
+    // lookup the api key in Secrets Manager
+    let apiKey = try await getAPIKey(secretId: apiKeySecretArn)
+    
+    // call the weather api to obtain temperature and air quality for the requested latitude and longitude
+    let response = try await callAPI(
+        apiEndpoint: apiEndpoint, 
+        apiKey: apiKey, 
+        latitude: event.arguments.latitude, 
+        longitude: event.arguments.longitude
+    )
+    
+    return response
+}
+
+try await runtime.run()

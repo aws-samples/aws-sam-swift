@@ -1,6 +1,6 @@
 import AWSLambdaRuntime
 import Foundation
-import AWSLocation
+@preconcurrency import AWSLocation
 
 // define struct for function event arguments
 struct Event: Codable {
@@ -22,33 +22,6 @@ struct Location: Codable {
 // define function error types
 enum FunctionError: Error {
     case envError
-}
-
-@main
-struct GetCityFunction: SimpleLambdaHandler {
-
-    // function handler
-    func handle(_ event: Event, context: LambdaContext) async throws -> Location {
-    
-        print("received event: \(event)")
-        
-        // get the name of the Amazon Location Place Index from the environment variable set with the CDK
-        let placeIndexName = try getEnvVariable(name: "PLACE_INDEX_NAME")
-        
-        // define an Amazon Location Service client
-        let client = try await LocationClient()
-
-        // construct the place index search parameters
-        let input = SearchPlaceIndexForPositionInput(
-            indexName: placeIndexName,
-            maxResults: 1,
-            position: [event.arguments.longitude, event.arguments.latitude]
-        )
-
-        let response = try await client.searchPlaceIndexForPosition(input: input)
-
-        return getCity(item: response.results![0])
-    }
 }
 
 // function to retrieve the function environment variables by name
@@ -74,3 +47,29 @@ func getCity (item: LocationClientTypes.SearchForPositionResult) -> Location {
         longitude: item.place!.geometry!.point![1]
     )
 }
+
+// define an Amazon Location Service client
+let client = try await LocationClient()
+
+// Lambda Handler
+let runtime = LambdaRuntime {
+    (event: Event, context: LambdaContext) async throws -> Location in
+
+    print("received event: \(event)")
+    
+    // get the name of the Amazon Location Place Index from the environment variable set with the CDK
+    let placeIndexName = try getEnvVariable(name: "PLACE_INDEX_NAME")
+    
+    // construct the place index search parameters
+    let input = SearchPlaceIndexForPositionInput(
+        indexName: placeIndexName,
+        maxResults: 1,
+        position: [event.arguments.longitude, event.arguments.latitude]
+    )
+
+    let response = try await client.searchPlaceIndexForPosition(input: input)
+
+    return getCity(item: response.results![0])
+}
+
+try await runtime.run()

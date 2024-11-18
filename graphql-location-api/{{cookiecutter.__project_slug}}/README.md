@@ -20,11 +20,17 @@ To build this sample application, you need:
 - [AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) - install the CLI and [configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) it with credentials to your AWS account
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) - a command-line tool used to create serverless workloads on AWS
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) - to compile your Swift code for Linux deployment to AWS Lambda
-- [IQ Air API Key](https://dashboard.iqair.com/) - a 3rd party API used to obtain weather and air quality for a specified location.  Create a free Community Edition API key.
+- [IQ Air API Key](https://dashboard.iqair.com/) - a 3rd party API used to obtain weather and air quality for a specified location. Create a free Community Edition API key.
 
 ## Build the application
 
-The **sam build** command uses Docker to compile your Swift Lambda functions and package them for deployment to AWS.
+The **swift package archive** command compiles your Swift code for deployment to Lambda.
+
+```
+swift package archive --allow-network-connections docker
+```
+
+The **sam build** command packages your Swift Lambda functions for deployment to AWS.
 
 ```bash
 sam build
@@ -38,7 +44,7 @@ Deploying your SAM project creates the Lambda functions, AppSync GraphQL API, an
 sam deploy --guided
 ```
 
-Accept the default response to every prompt. If you want to deploy to a region other than *us-east-1* specify the region when prompted.
+Accept the default response to every prompt. If you want to deploy to a region other than _us-east-1_ specify the region when prompted.
 
 ## Use the API
 
@@ -58,9 +64,9 @@ Value               [your-api-key]
 ------------------------------------------------------------------------------------------------------------
 ```
 
-Use cURL or a tool such as [Postman](https://www.postman.com/) to interact with your API. 
+Use cURL or a tool such as [Postman](https://www.postman.com/) to interact with your API.
 
-Replace **[your-api-endpoint]** with the APIEndpointValue value from the deployment output. 
+Replace **[your-api-endpoint]** with the APIEndpointValue value from the deployment output.
 
 Replace **[your-api-key]** with the ApiKeyValue value from the deployment output.
 
@@ -90,13 +96,13 @@ curl \
 [your-api-endpoint]
 ```
 
-Change the **placeType** to *food* or *fuel* to find other places.
+Change the **placeType** to _food_ or _fuel_ to find other places.
 
 ### Determine the Weather
 
 In order to query the weather you must obtain an API Key from [**IQ Air**](https://dashboard.iqair.com/). Signup for a free Community Edition key.
 
-Then update the *SwiftAPIWeatherApiKeySecret* secret with the api key value.
+Then update the _SwiftAPIWeatherApiKeySecret_ secret with the api key value.
 
 ```bash
 aws secretsmanager put-secret-value --secret-id SwiftAPIWeatherApiKeySecret --secret-string [your IQ Air API key]
@@ -115,13 +121,13 @@ curl \
 
 ### Send a Real-Time Message
 
-GraphQL has the capability to send and receive real-time messages between clients called *Subscriptions*.
+GraphQL has the capability to send and receive real-time messages between clients called _Subscriptions_.
 
-First, logon the the AWS Console and navigate to the AppSync service. Select your API and navigate to the *Queries* menu option. From there, use the Query Explorer to start a *Subscription* for the *onCreateMessage* mutation event as seen in this screenshot. Select the *Run* button to start the subscription.
+First, logon the the AWS Console and navigate to the AppSync service. Select your API and navigate to the _Queries_ menu option. From there, use the Query Explorer to start a _Subscription_ for the _onCreateMessage_ mutation event as seen in this screenshot. Select the _Run_ button to start the subscription.
 
 ![Architecture](images/subscription.png)
 
-Then initiate a *createMessage* mutation with the following cURL command. Make sure the *recipient* value is the same value used in your subscription in Query Explorer.
+Then initiate a _createMessage_ mutation with the following cURL command. Make sure the _recipient_ value is the same value used in your subscription in Query Explorer.
 
 ```bash
 curl \
@@ -134,10 +140,9 @@ curl \
 
 Your message is displayed in real-time in the results panel of the Query Explorer.
 
-
 ## Test the API Locally
-SAM allows you to test your Lambda functions locally on your development machine. Follow these instructions to execute each Lambda function. Further capabilities can be explored in the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html).
 
+SAM allows you to test your Lambda functions locally on your development machine. Follow these instructions to execute each Lambda function. Further capabilities can be explored in the [SAM Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html).
 
 **Event Files**
 

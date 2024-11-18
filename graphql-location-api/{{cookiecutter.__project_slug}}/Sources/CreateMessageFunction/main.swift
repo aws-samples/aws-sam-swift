@@ -1,0 +1,40 @@
+import AWSLambdaRuntime
+import Foundation
+
+// define struct for function event arguments
+struct Event: Codable {
+    let arguments: Arguments
+}
+
+struct Arguments: Codable {
+    let recipient: String
+    let text: String
+}
+
+// define struct for the output of the lambda function
+struct Message: Codable {
+    let recipient: String
+    let text: String
+    let id: String
+    let timestamp: String
+}
+
+// Lambda Handler
+let runtime = LambdaRuntime {
+    (event: Event, context: LambdaContext) async throws -> Message in
+
+    print("event received:\(event)")
+    
+    let dateFormatter = DateFormatter();
+    
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" 
+
+    return Message(
+        recipient: event.arguments.recipient,
+        text: event.arguments.text,
+        id: UUID().uuidString,
+        timestamp: dateFormatter.string(from: Date.now)
+    )
+}
+
+try await runtime.run()

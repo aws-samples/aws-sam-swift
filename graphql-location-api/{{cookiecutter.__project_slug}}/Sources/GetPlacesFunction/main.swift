@@ -1,6 +1,6 @@
 import AWSLambdaRuntime
 import Foundation
-import AWSLocation
+@preconcurrency import AWSLocation
 
 // define struct for function event arguments
 struct Event: Codable {
@@ -34,40 +34,6 @@ enum FunctionError: Error {
     case envError
 }
 
-@main
-struct GetPlacesFunction: SimpleLambdaHandler {
-
-    // function handler
-    func handle(_ event: Event, context: LambdaContext) async throws -> [Place] {
-    
-        print("received event: \(event)")
-
-        // get the name of the Amazon Location Place Index from the environment variable set with the CDK
-        let placeIndexName = try getEnvVariable(name: "PLACE_INDEX_NAME")
-
-        // define an Amazon Location Service client
-        let client = try await LocationClient()
-
-        // construct the place index search parameters
-        let input = SearchPlaceIndexForTextInput(
-            biasPosition: [event.arguments.longitude, event.arguments.latitude],
-            indexName: placeIndexName,
-            maxResults: event.arguments.maxResults,
-            text: "\(event.arguments.placeType)"
-        )
-
-        // execute the search against the place index and return the results
-        var response = [Place]()
-        let result = try await client.searchPlaceIndexForText(input: input)
-
-        result.results?.forEach { item in
-            response.append(getPlace(item: item, placeType: event.arguments.placeType))
-        }
-
-        return response
-    }
-}
-
 // function to retrieve the function environment variables by name
 func getEnvVariable(name: String) throws -> String {
     
@@ -96,3 +62,36 @@ func getPlace (item: LocationClientTypes.SearchForTextResult, placeType: PlaceTy
         longitude: item.place!.geometry!.point![1]
     )
 }
+
+// Lambda Handler
+let runtime = LambdaRuntime {
+    (event: Event, context: LambdaContext) async throws -> [Place] in
+
+    print("received event: \(event)")
+
+    // get the name of the Amazon Location Place Index from the environment variable set with the CDK
+    let placeIndexName = try getEnvVariable(name: "PLACE_INDEX_NAME")
+
+    // define an Amazon Location Service client
+    let client = try await LocationClient()
+
+    // construct the place index search parameters
+    let input = SearchPlaceIndexForTextInput(
+        biasPosition: [event.arguments.longitude, event.arguments.latitude],
+        indexName: placeIndexName,
+        maxResults: event.arguments.maxResults,
+        text: "\(event.arguments.placeType)"
+    )
+
+    // execute the search against the place index and return the results
+    var response = [Place]()
+    let result = try await client.searchPlaceIndexForText(input: input)
+
+    result.results?.forEach { item in
+        response.append(getPlace(item: item, placeType: event.arguments.placeType))
+    }
+
+    return response
+}
+
+try await runtime.run()
